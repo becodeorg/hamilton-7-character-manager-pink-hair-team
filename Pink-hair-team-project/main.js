@@ -80,23 +80,29 @@ displayAllCharacters();
 * @param {array} characterByName - host the response of the get demand on the data base
 * @returns {array} return the card of a character already in the database
 */
-async function getCharacterByName() {
-  let value = "Spiderman";
+
+let searchButton = document.querySelector('.searchButton');
+
+async function getCharacterByName(n) {
+
+  let value = n;
+
   const response = await axios.get(`https://character-database.becode.xyz/characters?name=${value}`);
 
   let characterByName = response.data;
-  return characterByName;
-}
 
-let searchBar = document.querySelector('input');
-searchBar.value = "Search character";
-let searchButton = document.querySelector('.searchButton');
+  window.location.replace(`../character.html?id=${characterByName.id}`);
+
+}
 
 searchButton.addEventListener('click', async(e) => {
 
+  let searchBar = document.querySelector('input');
+
   if(e.target.classList[1] == "searchButton"){
-    const result = getCharacterByName(searchBar.value);
-  } else {
-    displayAllCharacters();
+    if (searchBar.value.length !== 0){
+      const value = searchBar.value;
+      getCharacterByName(value);
+    }
   }
 });
