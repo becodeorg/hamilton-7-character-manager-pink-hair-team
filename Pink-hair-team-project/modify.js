@@ -61,7 +61,6 @@ async function inputCharacterAsync() {
 
             let data = response.data;
             console.log(data);
-            console.log("your if works, Dan");
             window.location.replace("./index.html");
             
     } else {
